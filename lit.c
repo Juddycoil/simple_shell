@@ -80,7 +80,7 @@ index++;
 
 letters = token_len(line + index, delim);
 
-ptr[t] = malloc(sizeof(char) * (letters + 1));
+ptr[n] = malloc(sizeof(char) * (letters + 1));
 if (!ptr[n])
 {
 for (index -= 1; index >= 0; index--)
