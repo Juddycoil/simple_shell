@@ -26,7 +26,7 @@ int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 			print_alias(temp);
 			temp = temp->next;
 		}
-		return (ret);
+		return (rets);
 	}
 	for (i = 0; args[i]; i++)
 	{

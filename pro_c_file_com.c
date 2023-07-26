@@ -4,9 +4,9 @@ int cant_open(char *file_path);
 int proc_file_commands(char *file_path, int *exe_ret);
 
 /**
-* cant_open - If  file doesn't exist or lacks proper permissions, print
-*  cant open error.
-* @file_path: to Path to the supposed file.
+* cant_open - The file doesn't exist or lacks proper permissions, print
+* a cant open error.
+* @file_path: Path to the supposed file.
 *
 * Return: 127.
 */
@@ -42,18 +42,19 @@ return (127);
 }
 
 /**
-* proc_file_commands - to Take  file and attempt to run the command stored
+* proc_file_commands - Takes a file and attempts to run the commands stored
 * within.
-* @file_path: the Path to  file.
+* @file_path: Path to the file.
 * @exe_ret: Return value of the last executed command.
 *
 * Return: If file couldn't be opened - 127.
 *   If malloc fails - -1.
-*   Otherwise  return value of the last command ran.
+*   Else the return value of the last command ran.
 */
+
 int proc_file_commands(char *file_path, int *exe_ret)
 {
-ssize_t file, b_read, c;
+ssize_t file, b_read, i;
 unsigned int line_size = 0;
 unsigned int old_size = 120;
 char *line, **args, **front;
@@ -81,15 +82,15 @@ _strcat(line, buffer);
 old_size = line_size;
 }
 while (b_read);
-for (c = 0; line[c] == '\n'; c++)
-line[c] = ' ';
-for (; c < line_size; c++)
+for (i = 0; line[i] == '\n'; i++)
+line[i] = ' ';
+for (; i < line_size; i++)
 {
-if (line[c] == '\n')
+if (line[i] == '\n')
 {
-line[c] = ';';
-for (c += 1; c < line_size && line[c] == '\n'; c++)
-line[c] = ' ';
+line[i] = ';';
+for (i += 1; i < line_size && line[i] == '\n'; i++)
+line[i] = ' ';
 }
 }
 variable_replacement(&line, exe_ret);
@@ -106,15 +107,15 @@ return (*exe_ret);
 }
 front = args;
 
-for (c = 0; args[c]; c++)
+for (i = 0; args[i]; i++)
 {
-if (_strncmp(args[c], ";", 1) == 0)
+if (_strncmp(args[i], ";", 1) == 0)
 {
-free(args[c]);
-args[c] = NULL;
+free(args[i]);
+args[i] = NULL;
 ret = call_args(args, front, exe_ret);
-args = &args[+cc];
-c = 0;
+args = &args[++i];
+i = 0;
 }
 }
 
